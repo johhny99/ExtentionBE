@@ -2,6 +2,9 @@
 from flask import Flask, render_template, redirect, url_for,request
 from flask import make_response,jsonify
 from flask_cors import CORS, cross_origin
+
+import os
+
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -12,14 +15,17 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
 chrome_options = Options()
-chrome_options.add_argument("--disable-user-media-security=true")
+chrome_options.binary_location=os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
 import time
 
 class TwitterBot:
     def __init__(self,username, password):
         self.username=username
         self.password=password
-        self.bot=webdriver.Chrome(executable_path="./chromedriver_win32/chromedriver.exe", chrome_options=chrome_options)
+        self.bot=webdriver.Chrome(executable_path=os.en.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     def login(self):
         bot=self.bot
