@@ -44,6 +44,8 @@ class TwitterBot:
         email.send_keys(self.username)
         password.send_keys(self.password)
         password.send_keys(Keys.RETURN)
+        url=bot.current_url
+        return url
 
 
 @app.route('/api/getsample', methods=['POST'])
@@ -56,13 +58,10 @@ def getsample():
             ed=TwitterBot(dataIn['username'],dataIn['password'])
             # print((dataIn))
             res=ed.login()
-            message = "<h1>User "+dataIn['username']+" has login !!!</h1>"
+            message = f"<h1>User "+dataIn['username']+" has access '{res}' !!!</h1>"
         return message
     except Exception as e:
         return str(e)#"<h1>Opps!! Something went wrong !!!</h1>"
-    
-
-
 @app.route('/script', methods = ['POST'])  
 def login():
     keyWord=request.form['uname']
