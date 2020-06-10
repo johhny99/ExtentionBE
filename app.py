@@ -44,9 +44,9 @@ class TwitterBot:
         password.send_keys(self.password)
         password.send_keys(Keys.RETURN)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 @app.route('/api/getsample', methods=['POST'])
 @cross_origin()
