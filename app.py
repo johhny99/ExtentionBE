@@ -15,7 +15,7 @@ class TwitterBot:
     def __init__(self,username, password):
         self.username=username
         self.password=password
-        self.bot=webdriver.Chrome("../chromedriver_win32/chromedriver.exe")
+        self.bot=webdriver.Chrome("./chromedriver_win32/chromedriver.exe")
 
     def login(self):
         bot=self.bot
@@ -41,9 +41,10 @@ def getsample():
         if request.method == 'POST':
             ed=TwitterBot(dataIn['username'],dataIn['password'])
             res=ed.login()
-        return "<h1>User "+dataIn['username']+" has login !!!</h1>"
+        string = "<h1>User "+dataIn['username']+" has login !!!</h1>"
+        return string
     except Exception as e:
-        return e#"<h1>Opps!! Something went wrong !!!</h1>"
+        return str(e)#"<h1>Opps!! Something went wrong !!!</h1>"
     
 
 @app.route('/getmsg/', methods=['GET'])
