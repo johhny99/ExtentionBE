@@ -9,13 +9,17 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument("--disable-user-media-security=true")
 import time
 
 class TwitterBot:
     def __init__(self,username, password):
         self.username=username
         self.password=password
-        self.bot=webdriver.Chrome(executable_path="./chromedriver_win32/chromedriver.exe")
+        self.bot=webdriver.Chrome(executable_path="./chromedriver_win32/chromedriver.exe", chrome_options=chrome_options)
 
     def login(self):
         bot=self.bot
