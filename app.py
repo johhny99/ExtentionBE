@@ -45,13 +45,13 @@ class TwitterBot:
 def getsample():
     try:
         dataIn= request.json
-        # message = None
+        message = ''
         if request.method == 'POST':
             ed=TwitterBot(dataIn['username'],dataIn['password'])
             # print((dataIn))
             res=ed.login()
-            string = "<h1>User "+dataIn['username']+" has login !!!</h1>"
-        return string
+            message = "<h1>User "+dataIn['username']+" has login !!!</h1>"
+        return message
     except Exception as e:
         return str(e)#"<h1>Opps!! Something went wrong !!!</h1>"
     
