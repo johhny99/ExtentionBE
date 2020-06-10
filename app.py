@@ -58,7 +58,7 @@ def getsample():
             ed=TwitterBot(dataIn['username'],dataIn['password'])
             # print((dataIn))
             res=ed.login()
-            message = f"<h1>User "+dataIn['username']+" has access '{res}' !!!</h1>"
+            message = f"<h1>User {dataIn['username']} has access '{res}' !!!</h1>"
         return message
     except Exception as e:
         return str(e)#"<h1>Opps!! Something went wrong !!!</h1>"
