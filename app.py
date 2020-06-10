@@ -14,32 +14,27 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+
 import time
 
-@app.route('/testdriver', methods=['GET'])
-@cross_origin()
-def getgoogle():
-    # bot=webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    try:
-        driver.get('https://www.google.com.vn/')
-    except Exception as e:
-        return e
 
 class TwitterBot:
+    
     def __init__(self,username, password):
         self.username=username
         self.password=password
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--no-sandbox")
         self.bot=webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     def login(self):
         bot=self.bot
         bot.get('https://twitter.com/login')
+        # bot.switch_to.window(bot.window_handles[-1])
         time.sleep(3)
         email=bot.find_element_by_name('session[username_or_email]')
         password = bot.find_element_by_name('session[password]')
@@ -48,6 +43,10 @@ class TwitterBot:
         email.send_keys(self.username)
         password.send_keys(self.password)
         password.send_keys(Keys.RETURN)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/api/getsample', methods=['POST'])
 @cross_origin()
