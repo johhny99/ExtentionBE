@@ -25,7 +25,10 @@ import time
 @app.route('/getgoogle/', methods=['GET'])
 def getgoogle():
     # bot=webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-    driver.get('https://www.google.com.vn/')
+    try:
+        driver.get('https://www.google.com.vn/')
+    except Exception as e:
+        return e
 
 class TwitterBot:
     def __init__(self,username, password):
