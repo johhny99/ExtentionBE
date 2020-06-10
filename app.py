@@ -14,13 +14,18 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
-chrome_options = Options()
-chrome_options.binary_location=os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument("--no-sandbox")
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 import time
+
+@app.route('/getgoogle/', methods=['GET'])
+def getgoogle():
+    # bot=webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver.get('https://www.google.com.vn/')
 
 class TwitterBot:
     def __init__(self,username, password):
