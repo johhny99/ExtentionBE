@@ -42,8 +42,8 @@ def getsample():
             ed=TwitterBot(dataIn['username'],dataIn['password'])
             res=ed.login()
         return "<h1>User "+dataIn['username']+" has login !!!</h1>"
-    except:
-        return "<h1>Opps!! Something went wrong !!!</h1>"
+    except Exception as e:
+        return e#"<h1>Opps!! Something went wrong !!!</h1>"
     
 
 @app.route('/getmsg/', methods=['GET'])
