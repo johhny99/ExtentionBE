@@ -44,12 +44,10 @@ class TwitterBot:
 def getsample():
     try:
         dataIn= request.json
-        
-        print((dataIn))
-        
         # message = None
         if request.method == 'POST':
             ed=TwitterBot(dataIn['username'],dataIn['password'])
+            print((dataIn))
             res=ed.login()
         string = "<h1>User "+dataIn['username']+" has login !!!</h1>"
         return string
