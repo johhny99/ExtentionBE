@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, url_for,request
 from flask import make_response,jsonify
 from flask_cors import CORS, cross_origin
 
+from script import runScript
 import os
 
 app = Flask(__name__)
@@ -44,9 +45,6 @@ class TwitterBot:
         password.send_keys(self.password)
         password.send_keys(Keys.RETURN)
 
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
 
 @app.route('/api/getsample', methods=['POST'])
 @cross_origin()
@@ -64,49 +62,17 @@ def getsample():
         return str(e)#"<h1>Opps!! Something went wrong !!!</h1>"
     
 
-@app.route('/getmsg/', methods=['GET'])
-def respond():
-    # Retrieve the name from url parameter
-    name = request.args.get("name", None)
 
-    # For debugging
-    print(f"got name {name}")
-
-    response = {}
-
-    # Check if user sent a name at all
-    if not name:
-        response["ERROR"] = "no name found, please send a name."
-    # Check if the user entered a number not a name
-    elif str(name).isdigit():
-        response["ERROR"] = "name can't be numeric."
-    # Now the user entered a valid name
-    else:
-        response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
-
-    # Return the response in json format
-    return jsonify(response)
-
-@app.route('/post/', methods=['POST'])
-def post_something():
-    param = request.form.get('name')
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
-        return jsonify({
-            "Message": f"Welcome {name} to our awesome platform!!",
-            # Add this option to distinct the POST request
-            "METHOD" : "POST"
-        })
-    else:
-        return jsonify({
-            "ERROR": "no name found, please send a name."
-        })
+@app.route('/script', methods = ['POST'])  
+def login():
+    keyWord=request.form['uname']
+    ans = runScript(keyWord)
+    return '<div>' +ans+ '</div>'
 
 # A welcome message to test our server
 @app.route('/')
 def index():
-    return "<h1>Welcome to our server !!</h1>"
+    return render_template('index.html')
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
