@@ -48,9 +48,9 @@ def getsample():
         # message = None
         if request.method == 'POST':
             ed=TwitterBot(dataIn['username'],dataIn['password'])
-            print((dataIn))
+            # print((dataIn))
             res=ed.login()
-        string = "<h1>User "+dataIn['username']+" has login !!!</h1>"
+            string = "<h1>User "+dataIn['username']+" has login !!!</h1>"
         return string
     except Exception as e:
         return str(e)#"<h1>Opps!! Something went wrong !!!</h1>"
