@@ -15,7 +15,7 @@ class TwitterBot:
     def __init__(self,username, password):
         self.username=username
         self.password=password
-        self.bot=webdriver.Chrome("~/chromedriver_linux64/chromedriver.exe")
+        self.bot=webdriver.Chrome("/chromedriver_linux64/chromedriver.exe")
 
     def login(self):
         bot=self.bot
